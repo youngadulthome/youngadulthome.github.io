@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nest & Reviewed – Home & Lifestyle Reviews</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --warm-brown: #6B4226;
+    --sage: #7A8C6E;
+    --dusty-rose: #C9837A;
+    --charcoal: #2C2825;
+    --muted: #8A7F78;
+    --border: #E8E2D9;
+    --white: #FFFFFF;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--warm-brown);
+    letter-spacing: -0.3px;
+  }
+
+  .logo span {
+    color: var(--sage);
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.8rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--warm-brown); }
+
+  .nav-cta {
+    background: var(--warm-brown);
+    color: var(--white) !important;
+    padding: 6px 16px;
+    border-radius: 20px;
+  }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 480px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-text {
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--warm-brown);
+  }
+
+  .hero-desc {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    line-height: 1.7;
+  }
+
+  .hero-btn {
+    display: inline-block;
+    background: var(--warm-brown);
+    color: var(--white);
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    width: fit-content;
+    transition: background 0.2s;
+  }
+
+  .hero-btn:hover { background: var(--charcoal); }
+
+  .hero-image {
+    background: linear-gradient(135deg, #E8DDD3 0%, #D4C4B5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-inner {
+    width: 260px;
+    height: 320px;
+    background: var(--white);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+
+  .card-img-hero {
+    height: 180px;
+    background: linear-gradient(160deg, #C9837A33, #7A8C6E44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+  }
+
+  .card-body-hero {
+    padding: 16px;
+  }
+
+  .star-row {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 8px;
+  }
+
+  .star {
+    color: #E8A020;
+    font-size: 13px;
+  }
+
+  .card-title-hero {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .card-muted {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* SECTION */
+  .section {
+    padding: 3rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--charcoal);
+    font-weight: 600;
+  }
+
+  .see-all {
+    font-size: 12px;
+    color: var(--sage);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* REVIEW CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .review-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .review-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+
+  .card-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+  }
+
+  .bg-sage { background: #EFF3EC; }
+  .bg-rose { background: #F7EEEC; }
+  .bg-warm { background: #F5EDDF; }
+
+  .card-body {
+    padding: 1rem 1.1rem 1.25rem;
+  }
+
+  .category-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  .pill-sage { background: #EFF3EC; color: #4A6040; }
+  .pill-rose { background: #F7EEEC; color: #8B4B44; }
+  .pill-warm { background: #F5EDDF; color: #7A5530; }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--charcoal);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .card-excerpt {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+
+  .star-small { color: #E8A020; font-size: 12px; }
+
+  .read-btn {
+    font-size: 12px;
+    color: var(--warm-brown);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--dusty-rose);
+    padding-bottom: 1px;
+  }
+
+  /* CATEGORIES */
+  .categories-strip {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+  }
+
+  .cats-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cat-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .cat-chip:hover {
+    background: var(--warm-brown);
+    color: var(--white);
+    border-color: var(--warm-brown);
+  }
+
+  .cat-chip.active {
+    background: var(--warm-brown);
+    color: var(--white);
+    border-color: var(--warm-brown);
+  }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--warm-brown);
+    color: var(--white);
+    text-align: center;
+    padding: 3rem 2rem;
+    margin: 2rem 0 0;
+  }
+
+  .nl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .nl-desc {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .nl-form {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .nl-input {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+
+  .nl-btn {
+    padding: 10px 22px;
+    background: var(--white);
+    color: var(--warm-brown);
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    margin: 0 8px;
+  }
+
+  footer a:hover { color: var(--white); }
+
+  .affiliate-notice {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Nest <span>&</span> Reviewed</div>
+  <ul class="nav-links">
+    <li><a href="#">Reviews</a></li>
+    <li><a href="#">Buying Guides</a></li>
+    <li><a href="#">Kitchen</a></li>
+    <li><a href="#">Bedroom</a></li>
+    <li><a href="#">Living Room</a></li>
+    <li><a href="#" class="nav-cta">Best Picks</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Trusted Home & Lifestyle Reviews</p>
+    <h1 class="hero-title">Real reviews for a <em>better</em> home life</h1>
+    <p class="hero-desc">We test and review the products that make everyday living easier, cozier, and more beautiful — so you can shop with confidence.</p>
+    <a href="#" class="hero-btn">Browse All Reviews</a>
+  </div>
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="card-img-hero">🛋️</div>
+      <div class="card-body-hero">
+        <div class="star-row">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="card-title-hero">Editor's Pick: Cozy Living Room Essentials</div>
+        <div class="card-muted">Reviewed by our team · June 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="categories-strip">
+  <div class="cats-inner">
+    <a href="#" class="cat-chip active">🏠 All</a>
+    <a href="#" class="cat-chip">🛁 Bathroom</a>
+    <a href="#" class="cat-chip">🍳 Kitchen</a>
+    <a href="#" class="cat-chip">🛏 Bedroom</a>
+    <a href="#" class="cat-chip">🌿 Garden</a>
+    <a href="#" class="cat-chip">💡 Lighting</a>
+    <a href="#" class="cat-chip">🧹 Cleaning</a>
+    <a href="#" class="cat-chip">🕯 Décor</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Latest Reviews</h2>
+    <a href="#" class="see-all">View all →</a>
+  </div>
+  <div class="cards-grid">
+    <div class="review-card">
+      <div class="card-img bg-sage">🫖</div>
+      <div class="card-body">
+        <span class="category-pill pill-sage">Kitchen</span>
+        <h3 class="card-title">The 5 Best Electric Kettles for Your Morning Routine</h3>
+        <p class="card-excerpt">We boiled thousands of cups of water to find which kettle is truly worth your counter space.</p>
+        <div class="card-footer">
+          <div class="rating-badge"><span class="star-small">★</span> 4.8</div>
+          <a href="#" class="read-btn">Read review</a>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="card-img bg-rose">🕯</div>
+      <div class="card-body">
+        <span class="category-pill pill-rose">Décor</span>
+        <h3 class="card-title">Best Scented Candles That Actually Fill a Room</h3>
+        <p class="card-excerpt">Hundreds of hours of burning later, these are the candles that pass our throw test — every time.</p>
+        <div class="card-footer">
+          <div class="rating-badge"><span class="star-small">★</span> 4.6</div>
+          <a href="#" class="read-btn">Read review</a>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="card-img bg-warm">🛏</div>
+      <div class="card-body">
+        <span class="category-pill pill-warm">Bedroom</span>
+        <h3 class="card-title">Top-Rated Weighted Blankets for Better Sleep</h3>
+        <p class="card-excerpt">We slept under 8 weighted blankets for 30 nights. Here's which one we reach for every night.</p>
+        <div class="card-footer">
+          <div class="rating-badge"><span class="star-small">★</span> 4.9</div>
+          <a href="#" class="read-btn">Read review</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="newsletter">
+  <h2 class="nl-title">Get our best picks in your inbox</h2>
+  <p class="nl-desc">New reviews every week — no spam, just honest recommendations.</p>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="your@email.com" />
+    <button class="nl-btn">Subscribe</button>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <a href="#">About</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Affiliate Disclosure</a>
+    <a href="#">Contact</a>
+  </div>
+  <p class="affiliate-notice">As an Amazon Associate, Nest & Reviewed earns from qualifying purchases. Prices and availability are subject to change.</p>
+</footer>
+
+</body>
+</html>
